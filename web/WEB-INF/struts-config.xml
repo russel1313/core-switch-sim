@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts-config PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 1.2//EN"
+        "http://struts.apache.org/dtds/struts-config_1_2.dtd">
+
+<struts-config>
+    <form-beans>
+        <form-bean
+                name="cardTcpMonitor"
+                type="com.russel.web.form.CardTcpMonitorActionForm"
+        />
+    </form-beans>
+
+    <action-mappings>
+        <action
+                path="/cardTcpMonitor"
+                type="com.russel.web.action.CardTcpMonitorAction"
+                name="cardTcpMonitor"
+                scope="request"
+                parameter="method"
+                unknown="false"
+                validate="false"
+                >
+            <set-property
+                    property="cancellable"
+                    value="true"
+                    />
+            <forward
+                    name="startMonitor"
+                    path="/index.jsp"
+                    redirect="false"
+                    />
+            <forward
+                    name="stopMonitor"
+                    path="/index.jsp"
+                    redirect="false"
+                    />
+            <forward
+                    name="cancel"
+                    path="/index.jsp"
+                    redirect="false"
+                    />
+        </action>
+    </action-mappings>
+
+    <controller nocache="true" inputForward="true" maxFileSize="2M"
+                processorClass="org.apache.struts.tiles.TilesRequestProcessor"/>
+    <message-resources parameter="MessageResources"/>
+    <plug-in className="org.apache.struts.tiles.TilesPlugin">
+        <set-property value="/WEB-INF/tiles-defs.xml" property="definitions-config"/>
+    </plug-in>
+    <plug-in className="org.apache.struts.validator.ValidatorPlugIn">
+        <set-property value="/WEB-INF/validator-rules.xml,/WEB-INF/validation.xml" property="pathnames"/>
+    </plug-in>
+
+</struts-config>
